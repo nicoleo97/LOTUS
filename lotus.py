@@ -76,8 +76,8 @@ def create_grid_pdf(monat):
             pdf.rect(x,y,box_width, box_height)
 
             if indx == 4:
-                pdf.set_xy(x+2, y+2) # 2mm Padding
-                pdf.set_font('Helvetica', size=22, style='BU')
+                pdf.set_xy(x+2, y + (box_height-8)/2)
+                pdf.set_font('Helvetica', size=40, style='B')
                 pdf.set_text_color(0,0,0)
                 pdf.multi_cell(w= box_width-4, h=8, txt=monat, align= 'C')
             else:
