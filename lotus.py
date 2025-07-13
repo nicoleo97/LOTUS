@@ -63,12 +63,12 @@ def create_grid_pdf(monat, titel, farben):
 
             # Überschriften und Monat schreiben
             if indx == 4:
-                pdf.set_xy(x+2, y + (box_height-8)/2)
+                pdf.set_xy(x+3, y + (box_height-8)/2)
                 pdf.set_font('Helvetica', size=40, style='B')
                 pdf.set_text_color(0,0,0)
                 pdf.multi_cell(w= box_width-4, h=8, txt=monat, align= 'C')
             else:
-                pdf.set_xy(x+2, y+2) # 2mm Padding
+                pdf.set_xy(x+3, y+3) # 2mm Padding
                 pdf.set_font('Helvetica', size=18, style='BU')
                 r, g, b = hex_to_rgb(farben[indx])
                 pdf.set_text_color(r, g, b)
@@ -78,7 +78,7 @@ def create_grid_pdf(monat, titel, farben):
             if indx == 4:
                 pass
             else:
-                pdf.set_xy(x+2, y+25) # 2mm Padding
+                pdf.set_xy(x+2, y+30) # 2mm Padding
                 pdf.set_font('Helvetica', size=14)
                 r, g, b = hex_to_rgb(farben[indx])
                 pdf.set_text_color(r, g, b)
@@ -92,12 +92,14 @@ st.title('Lotus Generator')
 st.subheader('Monat eingeben')
 monat = st.selectbox('Monat auswählen', monate)
 
+st.subheader('Text pro Thema eingeben')
 input_data=[]
 for i in range(len(titel)):
     if i ==4:
-        pass
-    input = st.text_area(titel[i])
-    input_data.append(input)
+        input_data.append("")
+    else:
+        input = st.text_area(titel[i])
+        input_data.append(input)
 
 if st.button("PDF generieren"):
     pdf_bytes = create_grid_pdf(monat,titel,farben)
